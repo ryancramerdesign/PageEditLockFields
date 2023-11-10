@@ -1,0 +1,6 @@
+.InputfieldRepeater.InputfieldIsLocked .InputfieldRepeaterAddItem,
+.InputfieldIsLocked .InputfieldMultiplierAdd,
+.InputfieldIsLocked .PageListSelectActionToggle {
+	/* hide "add" links and other buttons/controls where needed */
+	display: none;
+}
