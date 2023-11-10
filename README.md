@@ -13,7 +13,7 @@ do so. [Read more](https://processwire.com/blog/posts/page-edit-lock-fields/)
 
 ## Please note
 
-The first ersion of this module was released on November 10th, 2023. Please 
+The first version of this module was released on November 10th, 2023. Please 
 consider it in a beta test state until Januarary 2024. Any issues will be resolved 
 as they are reported. While in a beta test state, you should test the 
 features of this module in a development environment before using in a 
