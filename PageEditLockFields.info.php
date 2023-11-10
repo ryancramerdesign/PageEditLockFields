@@ -1,5 +1,7 @@
 <?php namespace ProcessWire;
 
+if(!defined("PROCESSWIRE")) die();
+
 $info = [
 	'title' => 'Page Edit Lock Fields',
 	'version' => 1,

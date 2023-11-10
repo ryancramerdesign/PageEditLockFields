@@ -1,5 +1,7 @@
 <?php namespace ProcessWire;
 
+if(!defined("PROCESSWIRE")) die();
+
 /**
  * Page Edit Locks Fields: Config
  * 
