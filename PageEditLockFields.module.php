@@ -734,17 +734,15 @@ class PageEditLockFields extends WireData implements Module, ConfigurableModule 
 		if(empty($_POST) && count($this->renderInputsFor)) {
 			$fieldId = $f->hasField ? $f->hasField->id : $this->fieldId($f->attr('name'));
 			$renderInputs = in_array($fieldId, $this->renderInputsFor);
+			if($renderInputs) $f->wrapClass('InputfieldIsLockedButRendered');
 		}
-		
-		if($renderInputs) {
-			// still show input but do not process
-			$f->wrapClass('InputfieldIsLockedButRendered');
-		} 
 		
 		if($f->collapsed == Inputfield::collapsedYesAjax) {
 			$this->lockAjaxInputfield($f);
 		} else if($this->hasToggle('minimize')) {
-			$f->collapsed = Inputfield::collapsedYesLocked;
+			$f->collapsed = $renderInputs ? Inputfield::collapsedYes : Inputfield::collapsedYesLocked;
+		} else if($renderInputs) {
+			// leave as-is
 		} else if(isset($this->lockAdjustments[$f->collapsed])) {
 			$f->collapsed = $this->lockAdjustments[$f->collapsed];
 		} else {
@@ -769,10 +767,11 @@ class PageEditLockFields extends WireData implements Module, ConfigurableModule 
 	 * no combination locked + ajax collapsed state in the core. 
 	 * 
 	 * @param Inputfield $f
+	 * @param bool $renderInputs
 	 * 
 	 */
-	protected function lockAjaxInputfield(Inputfield $f) {
-		if($this->wire()->input->get('renderInputfieldAjax') === $f->attr('id')) {
+	protected function lockAjaxInputfield(Inputfield $f, $renderInputs) {
+		if(!$renderInputs && $this->wire()->input->get('renderInputfieldAjax') === $f->attr('id')) {
 			$this->addHookBefore('InputfieldWrapper::renderInputfield', 
 				function(HookEvent $e) use($f) {
 					$inputfield = $e->arguments(0); /** @var Inputfield $inputfield */
