@@ -200,7 +200,9 @@ function PageEditLockFields() {
 	}
 
 	// long click event handler
-	let longclickEvent = function() {
+	let longclickEvent = function(e) {
+		if($(e.target).hasClass('ui-slider-handle')) return; // i.e. InputfieldImage resize handle
+		
 		let $f = $(this).closest('.Inputfield');
 		let $c = getCheckboxForInputfield($f);
 		
